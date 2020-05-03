@@ -3,21 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 
-def norm(X):
-    return np.linalg.norm(X, axis = 1)  
-
-def preprocessing(img_RGB):
-    img_Lab = cv2.cvtColor(img_RGB, cv2.COLOR_RGB2LAB)
-    L = img_Lab[:,:,0].flatten()
-    a = img_Lab[:,:,1].flatten()
-    b = img_Lab[:,:,2].flatten()
-    img_dimensions = img_Lab.shape[:2]
-    x_coords, y_coords = np.indices(img_dimensions)
-    x = x_coords.flatten()
-    y = y_coords.flatten()
-    data = np.column_stack((L, a, b, x, y))
-    return data    
-
 class kmeans:
     def __init__(self, use_kmeans_plus = False, number_of_components = 5, number_of_iterations = 25):
         self.m = number_of_components
@@ -77,18 +62,6 @@ class kmeans:
            
         return losses, self.Mu, self.Labels
             
-# In[1]
-
-img = plt.imread('mandm.png')
-data = preprocessing(img)
-
-# In[2]
-
-my_kmeans = kmeans()
-losses, Mu, Labels = my_kmeans.fit(data)
 
 
-# %%
 
-
-# %%
